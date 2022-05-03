@@ -295,3 +295,30 @@ getch();
 
 
 
+
+
+
+exp 4
+
+
+import os
+n=os.fork()
+print(n)
+
+print("in parent process")
+
+#os.wait()
+
+if n>0:
+	print(n)
+	a=os.getpid()
+aise sab
+
+f=open("demo.txt","w")
+f.write("hello")
+
+f=open("demo.txt","a")
+f.write("world")
+
+f=open("demo.txt","a")
+print(f.read())
