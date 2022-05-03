@@ -1,0 +1,21 @@
+exp2 
+
+logname
+echo "$SHELL"(checking current shell)
+uname 
+uname -r
+use --help after all commnd
+
+(for shell scripting 
+
+vi shri.sh
+i for insert
+#! /bin/sh
+command you eant to execute
+
+
+press escap then :wq
+chmod 777  shri.sh
+./shri.sh
+
+
