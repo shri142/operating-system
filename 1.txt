@@ -18,4 +18,5 @@ press escap then :wq
 chmod 777  shri.sh
 ./shri.sh
 
+exp3
 
