@@ -20,4 +20,3 @@ chmod 777  shri.sh
 
 exp3
 
-this is exp 3
