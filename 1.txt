@@ -78,3 +78,220 @@ print("Average Waiting Time: ",avg_WT)
 
 
 
+
+exp6 (producer consumer)
+
+import threading 
+import time 
+# Shared Memory variables 
+CAPACITY = 10 
+buffer = [-1 for i in range(CAPACITY)] 
+in_index = 0 
+out_index = 0 
+# Declaring Semaphores 
+mutex = threading.Semaphore() 
+empty = threading.Semaphore(CAPACITY) 
+full = threading.Semaphore(0) 
+# Producer Thread Class 
+class Producer(threading.Thread): 
+    def run(self): 
+        global CAPACITY, buffer, in_index, out_index 
+        global mutex, empty, full 
+        items_produced = 0 
+        counter = 0 
+        while items_produced < 20: 
+            empty.acquire() 
+            mutex.acquire() 
+            counter += 1 
+            buffer[in_index] = counter 
+            in_index = (in_index + 1)%CAPACITY 
+            print("Producer produced : ", counter) 
+            mutex.release() 
+            full.release() 
+            time.sleep(1) 
+            items_produced += 1     
+# Consumer Thread Class 
+class Consumer(threading.Thread): 
+    def run(self): 
+        global CAPACITY, buffer, in_index, out_index, counter
+        global mutex, empty, full 
+        items_consumed = 0 
+while items_consumed < 20: 
+    full.acquire() 
+    mutex.acquire() 
+    item = buffer[out_index] 
+    out_index = (out_index + 1)%CAPACITY 
+    print("Consumer consumed item : ", item) 
+    mutex.release() 
+    empty.release() 
+    time.sleep(2.5) 
+    items_consumed += 1 
+# Creating Threads 
+producer = Producer() 
+consumer = Consumer() 
+# Starting Threads 
+consumer.start() 
+producer.start() 
+# Waiting for threads to complete 
+producer.join() 
+consumer.join() 
+
+
+
+
+exp 7(bankers algo)
+
+
+def main():
+
+
+    processes = int(input("number of processes : "))
+    resources = int(input("number of resources : "))
+    max_resources = [int(i) for i in input("maximum resources : ").split()]
+    print("\n-- allocated resources for each process --")
+    currently_allocated = [[int(i) for i in input(
+        f"process {j + 1} : ").split()] for j in range(processes)]
+    print("\n-- maximum resources for each process --")
+    max_need = [[int(i) for i in input(
+        f"process {j + 1} : ").split()] for j in range(processes)]
+    allocated = [0] * resources
+    for i in range(processes):
+        for j in range(resources):
+            allocated[j] += currently_allocated[i][j]
+    print(f"\ntotal allocated resources : {allocated}")
+    available = [max_resources[i] - allocated[i] for i in range(resources)]
+    print(f"total available resources : {available}\n")
+    running = [True] * processes
+    count = processes
+    while count != 0:
+        safe = False
+    for i in range(processes):
+        if running[i]:
+            executing = True
+    for j in range(resources):
+        if max_need[i][j] - currently_allocated[i][j] > available[j]:
+            executing = False
+            break
+    if executing:
+        print(f"process {i + 1} is executing")
+    running[i] = False
+    count -= 1
+    safe = True
+    for j in range(resources):
+        available[j] += currently_allocated[i][j]
+        break
+    if not safe:
+        print("the processes are in an unsafe state.")
+        break  #idhhar errrer aa raha tha
+    print(f"the process is in a safe state.\navailable resources : {available}\n")
+if name == ' main ':
+    main()
+
+
+
+
+exp8(bestfit)
+
+def bestFit(blockSize, m, processSize, n): 
+    oldBlock = blockSize.copy()
+    allocation = [-1] * n 
+    for i in range(n): 
+        bestIdx = -1 
+        for j in range(m): 
+         
+            if blockSize[j] >= processSize[i]: 
+                if bestIdx == -1: 
+                    bestIdx = j 
+                elif blockSize[bestIdx] > blockSize[j]: 
+                    bestIdx = j 
+    if bestIdx != -1: 
+        allocation[i] = bestIdx 
+    blockSize[bestIdx] -= processSize[i] 
+    print("Process No. Process Size \t Block Size Block no.") 
+    for i in range(n): 
+        print(i + 1, " ", processSize[i], end = '')
+     
+    if allocation[i] != -1: 
+        print(oldBlock[allocation[i]], end = '') 
+        print(allocation[i] + 1) 
+    else: 
+        print("Not Allocated") 
+    
+if _name_ == '_main_': 
+    blockSize = [100, 500, 200, 300,600] 
+    processSize = [212, 417, 112, 426] 
+    m = len(blockSize) 
+    n =len(processSize)  
+    bestFit(blockSize, m, processSize, n) 
+
+
+exp9 (page replacement fifo)
+
+from queue import Queue 
+def pageFaults(pages, n, capacity): 
+    s = set() 
+    indexes = Queue() 
+    page_faults = 0 
+    for i in range(n): 
+        if (len(s) < capacity): 
+            if (pages[i] not in s): 
+                s.add(pages[i]) 
+                page_faults += 1 
+                indexes.put(pages[i]) 
+        else: 
+            if (pages[i] not in s): 
+                val = indexes.queue[0] 
+                indexes.get() 
+                s.remove(val) 
+                s.add(pages[i]) 
+                indexes.put(pages[i]) 
+                page_faults += 1 
+    return page_faults 
+if __name__ == '__main__': 
+    pages = [7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2] 
+    n = len(pages) 
+    capacity = 4 
+    print("Total Page Faults :",pageFaults(pages, n, capacity))
+    
+    
+    
+    
+    
+    
+ exp 10 (simulate files)
+    
+    #include<stdio.h> 
+#include<conio.h> 
+void main() 
+{ 
+int f[50], i, st, len, j, c, k, count = 0; 
+for(i=0;i<50;i++) 
+f[i]=0; 
+printf("Files Allocated are : \n"); 
+x: count=0; 
+printf("Enter starting block and length of files:"); scanf("%d%d", &st,&len); 
+for(k=st;k<(st+len);k++) 
+if(f[k]==0) 
+count++; 
+if(len==count) 
+{ 
+for(j=st;j<(st+len);j++) 
+if(f[j]==0) 
+{ 
+f[j]=1; 
+printf("%d\t%d\n",j,f[j]); 
+} 
+if(j!=(st+len-1))
+printf("The file is allocated to disk\n"); 
+} 
+else 
+printf("The file is not allocated \n"); 
+printf("Do you want to enter more file(Yes - 1/No - 0)"); scanf("%d", &c); 
+if(c==1) 
+goto x; 
+else 
+getch(); 
+}
+
+
+
