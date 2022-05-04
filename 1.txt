@@ -25,7 +25,17 @@ exp3
 
 import os 
 n = os.fork() 
-if n>0: 
+#for child process 1
+if n1>0: 
+    print("\nParent process id is: " ,os.getppid())  
+elif n==0: 
+    print("\nChild process id is: " ,os.getpid()) 
+    print("\nParent process id is: " ,os.getppid()) 
+    
+ #for child process 2   
+
+n = os.fork() 
+if n2>0: 
     print("\nParent process id is: " ,os.getppid())  
 elif n==0: 
     print("\nChild process id is: " ,os.getpid()) 
