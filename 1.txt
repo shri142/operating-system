@@ -24,20 +24,20 @@ chmod 777  shri.sh
 exp3
 
 import os 
-n = os.fork() 
+n1 = os.fork() 
 #for child process 1
 if n1>0: 
     print("\nParent process id is: " ,os.getppid())  
-elif n==0: 
+elif n1==0: 
     print("\nChild process id is: " ,os.getpid()) 
     print("\nParent process id is: " ,os.getppid()) 
     
  #for child process 2   
 
-n = os.fork() 
+n2 = os.fork() 
 if n2>0: 
     print("\nParent process id is: " ,os.getppid())  
-elif n==0: 
+elif n2==0: 
     print("\nChild process id is: " ,os.getpid()) 
     print("\nParent process id is: " ,os.getppid()) 
     
